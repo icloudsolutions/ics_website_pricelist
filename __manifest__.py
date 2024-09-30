@@ -1,6 +1,6 @@
 {
     'name': 'Default Pricelist for Websites',
-    'version': '1.0',
+    'version': '16.0.0.1',
     'category': 'Website',
     'summary': 'Create a default pricelist if none exist for websites',
     'description': """
