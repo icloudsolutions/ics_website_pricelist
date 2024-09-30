@@ -17,3 +17,19 @@ class ProductPricelist(models.Model):
                     'selectable': True
                 })
                 website.pricelist_ids = [(4, default_pricelist.id)]
+
+    @api.model
+    def update_pricelists_website_id(self):
+        # Sélectionner le site web que vous voulez associer aux listes de prix
+        website = self.env['website'].search([('name', '=', 'You can')], limit=1)
+        if not website:
+            raise ValueError("Le site web 'You can' n'existe pas.")
+
+        # Rechercher les listes de prix qui n'ont pas de website_id
+        pricelists = self.env['product.pricelist'].search([('website_id', '=', False)])
+
+        # Mettre à jour le champ website_id pour toutes les listes de prix trouvées
+        for pricelist in pricelists:
+            pricelist.write({'website_id': website.id})
+
+        return True
